@@ -9384,7 +9384,11 @@ function rFin(p){
       if((dv + mv) < ba) underCovered++;
     });
 
-    h += `<p class="section-label" style="margin-top:18px">Billing Pending <span style="font-size:11px;color:var(--text-t);font-weight:400;margin-left:6px">${grnGenItems.length} ${grnGenItems.length === 1 ? 'item' : 'items'}${underCovered > 0 ? ' · <span style=\"color:var(--red);font-weight:600\">' + underCovered + ' under-covered</span>' : ''}</span></p>`;
+    // v120: Section was originally labelled "Billing Pending" but the user
+    //   considers this list to be "Unbilled Items" (GRN done = received at
+    //   site, but billing not yet covering it). Renamed for clarity — the
+    //   underlying filter (stockIn > 0) and under-covered logic are unchanged.
+    h += `<p class="section-label" style="margin-top:18px">Unbilled Items <span style="font-size:11px;color:var(--text-t);font-weight:400;margin-left:6px">${grnGenItems.length} ${grnGenItems.length === 1 ? 'item' : 'items'}${underCovered > 0 ? ' · <span style=\"color:var(--red);font-weight:600\">' + underCovered + ' under-covered</span>' : ''}</span></p>`;
     h += `<div style="font-size:11px;color:var(--text-t);margin-bottom:8px">Rows highlighted red: <b style="color:var(--red)">Measured Value + Delivered Value &lt; Billed Amount</b> (billed beyond coverage).</div>`;
     h += `<div class="twrap"><div class="tbar"><input class="sinput" placeholder="Search items…" id="grnGenSearch" oninput="window._grnGenFilter()" style="width:240px"></div><div class="tscroll" style="max-height:500px"><table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr>
       <th style="text-align:center;width:50px">Sr.</th>
